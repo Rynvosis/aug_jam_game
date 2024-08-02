@@ -22,8 +22,8 @@ impl<T: Spawn> Widgets for T {
             Name::new("Button"),
             ButtonBundle {
                 style: Style {
-                    width: Px(200.0),
-                    height: Px(65.0),
+                    width: Px(48.0),
+                    height: Px(12.0),
                     justify_content: JustifyContent::Center,
                     align_items: AlignItems::Center,
                     ..default()
@@ -43,7 +43,7 @@ impl<T: Spawn> Widgets for T {
                 TextBundle::from_section(
                     text,
                     TextStyle {
-                        font_size: 40.0,
+                        font_size: 8.0,
                         color: BUTTON_TEXT,
                         ..default()
                     },
@@ -58,8 +58,8 @@ impl<T: Spawn> Widgets for T {
             Name::new("Header"),
             NodeBundle {
                 style: Style {
-                    width: Px(500.0),
-                    height: Px(65.0),
+                    width: Px(60.0),
+                    height: Px(20.0),
                     justify_content: JustifyContent::Center,
                     align_items: AlignItems::Center,
                     ..default()
@@ -89,7 +89,7 @@ impl<T: Spawn> Widgets for T {
             Name::new("Label"),
             NodeBundle {
                 style: Style {
-                    width: Px(500.0),
+                    width: Px(64.0),
                     justify_content: JustifyContent::Center,
                     align_items: AlignItems::Center,
                     ..default()
@@ -103,7 +103,7 @@ impl<T: Spawn> Widgets for T {
                 TextBundle::from_section(
                     text,
                     TextStyle {
-                        font_size: 24.0,
+                        font_size: 8.0,
                         color: LABEL_TEXT,
                         ..default()
                     },
@@ -132,7 +132,7 @@ impl Containers for Commands<'_, '_> {
                     justify_content: JustifyContent::Center,
                     align_items: AlignItems::Center,
                     flex_direction: FlexDirection::Column,
-                    row_gap: Px(10.0),
+                    row_gap: Px(00.0),
                     position_type: PositionType::Absolute,
                     ..default()
                 },

@@ -2,6 +2,8 @@
 
 use bevy::prelude::*;
 
+// use crate::game::input::BoxMovement;
+use crate::config::PIXEL_PERFECT_LAYERS;
 use crate::{
     game::{
         animation::PlayerAnimation,
@@ -14,6 +16,7 @@ use crate::{
 pub(super) fn plugin(app: &mut App) {
     app.observe(spawn_player);
     app.register_type::<Player>();
+    // app.add_systems(Update, move_player);
 }
 
 #[derive(Event, Debug)]
@@ -42,7 +45,7 @@ fn spawn_player(
         Player,
         SpriteBundle {
             texture: image_handles[&ImageKey::Ducky].clone_weak(),
-            transform: Transform::from_scale(Vec2::splat(8.0).extend(1.0)),
+            transform: Transform::default(),
             ..Default::default()
         },
         TextureAtlas {
@@ -50,9 +53,34 @@ fn spawn_player(
             index: player_animation.get_atlas_index(),
         },
         MovementController::default(),
-        Movement { speed: 420.0 },
+        Movement { speed: 16.0 },
         WrapWithinWindow,
         player_animation,
         StateScoped(Screen::Playing),
+        PIXEL_PERFECT_LAYERS,
     ));
 }
+
+// fn move_player(
+//     mut query: Query<(&mut Transform, &ActionState<BoxMovement>)>,
+//     camera: Query<(&Camera, &GlobalTransform)>,
+// ) {
+//     let Ok((mut box_transform, action_state)) = query.get_single_mut() else {
+//         warn!("No player found.");
+//         return;
+//     };
+//     let (camera, camera_transform) = camera.single();
+//
+//     // Note: Nothing is stopping us from doing this in the action update system instead!
+//     let Some(cursor_movement) = action_state.axis_pair(&BoxMovement::MousePosition) else {
+//         warn!("No cursor movement detected.");
+//         return;
+//     };
+//     let ray = camera
+//         .viewport_to_world(camera_transform, cursor_movement.xy())
+//         .unwrap();
+//     let box_pan_vector = ray.origin.truncate();
+//
+//     box_transform.translation.x = box_pan_vector.x;
+//     box_transform.translation.y = box_pan_vector.y;
+// }
